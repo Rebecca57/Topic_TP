@@ -1,6 +1,15 @@
+C:\Users\Micha\OneDrive\Bureau\FormationJava\DB\structure\src\main\java\fr\m2i\servlets\UserServlet.java
 C:\Users\Micha\OneDrive\Bureau\FormationJava\DB\structure\src\main\java\fr\m2i\api\WelcomeService.java
 C:\Users\Micha\OneDrive\Bureau\FormationJava\DB\structure\src\main\java\fr\m2i\servlets\WelcomeServlet.java
-C:\Users\Micha\OneDrive\Bureau\FormationJava\DB\structure\src\main\java\fr\m2i\models\Actor.java
 C:\Users\Micha\OneDrive\Bureau\FormationJava\DB\structure\src\main\java\fr\m2i\models\ActorBean.java
-C:\Users\Micha\OneDrive\Bureau\FormationJava\DB\structure\src\main\java\fr\m2i\servlets\ActorServlet.java
+C:\Users\Micha\OneDrive\Bureau\FormationJava\DB\structure\src\main\java\fr\m2i\models\User.java
+C:\Users\Micha\OneDrive\Bureau\FormationJava\DB\structure\src\main\java\fr\m2i\servlets\TachesServlet.java
+C:\Users\Micha\OneDrive\Bureau\FormationJava\DB\structure\src\main\java\fr\m2i\models\TacheDaoImpl.java
+C:\Users\Micha\OneDrive\Bureau\FormationJava\DB\structure\src\main\java\fr\m2i\methods\MethodesTaches.java
 C:\Users\Micha\OneDrive\Bureau\FormationJava\DB\structure\src\main\java\fr\m2i\servlets\ActorName.java
+C:\Users\Micha\OneDrive\Bureau\FormationJava\DB\structure\src\main\java\fr\m2i\methods\Utilities.java
+C:\Users\Micha\OneDrive\Bureau\FormationJava\DB\structure\src\main\java\fr\m2i\methods\DaoFactory.java
+C:\Users\Micha\OneDrive\Bureau\FormationJava\DB\structure\src\main\java\fr\m2i\models\Tache.java
+C:\Users\Micha\OneDrive\Bureau\FormationJava\DB\structure\src\main\java\fr\m2i\models\Actor.java
+C:\Users\Micha\OneDrive\Bureau\FormationJava\DB\structure\src\main\java\fr\m2i\models\TacheDAO.java
+C:\Users\Micha\OneDrive\Bureau\FormationJava\DB\structure\src\main\java\fr\m2i\servlets\ActorServlet.java

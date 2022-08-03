@@ -33,9 +33,6 @@ public class WelcomeServlet extends HttpServlet {
 	private DataSource dataSource;
 	
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public WelcomeServlet() {
         super();
         // TODO Auto-generated constructor stub
@@ -85,6 +82,11 @@ public class WelcomeServlet extends HttpServlet {
 		EntityManager em = factory.createEntityManager();
 		
 		Actor actor = em.find(Actor.class, 1);
+		//em.persist(nouvel actor)
+		//em.remove(un actor)
+		//em.refresh(entity) -- rafraichir DB
+		//em.detach(entity) 
+		//em.flush() -- on pousse tout dans la DB attention
 		
 		em.close();
 		

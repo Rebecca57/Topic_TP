@@ -1,9 +1,46 @@
 @charset "ISO-8859-1";
 
+body{
+	font-family: "Goudy Old Style", "arial";
+}
+
+h1{
+	font-size: 1.5em;
+	color:#673434;
+}
+
+#general{
+	background-color:#d2d3be;
+}
+
+input{
+	font-family: "Goudy Old Style", "arial";
+	font-style: italic;
+}
+
+input[type=submit]{
+	background-color: #949568;
+	border: 1px solid black;;
+	border-radius: 4px;
+}
+
+input[type=text]{
+	background-color: #c2fef8;
+	border: 1px solid black;;
+	border-radius: 2px;
+	height: 10px;
+	width: 100px;
+	
+}
+
+label{
+	font-weight: bold;
+	color:rgb(128, 64, 0);
+}
+
 header{
 	background-color:#EEEEFF;
-	height:10em;
-	
+	height:10em;	
 }
 
 main{
@@ -47,4 +84,7 @@ footer{
 	border:solid 1px silver;
 	height:10em;
 	overflow:auto;
+}
+form{
+	display:inline-block;
 }

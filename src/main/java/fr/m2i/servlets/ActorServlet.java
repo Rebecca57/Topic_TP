@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.m2i.methods.Utilities;
 import fr.m2i.models.ActorBean;
 
 /**
@@ -44,80 +45,27 @@ public class ActorServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		
-		ArrayList<ActorBean> elements = new ArrayList<>(); 
-		try {
-			
-			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-			Connection connection = DriverManager.getConnection(BDD,LOGIN,MDP);
-			Statement state = connection.createStatement();
-			 
-			ResultSet rs = state.executeQuery("select first_name, last_name, last_update, actor_id from actor");
-			System.out.println("OK DB");
-			while(rs.next()) {
-				String prenom = rs.getString("first_name");
-				String nom = rs.getString("last_name");
-				int id = rs.getInt("actor_id");
-				Date date = rs.getDate("last_update");
-				elements.add(new ActorBean(prenom,nom,id,date));
-			}
-			
-			state.close();	
-			connection.close();
-		} catch (SQLException e) {
-			System.out.println(e);
-		}
-		
-		System.out.println(elements);
-		request.getSession().setAttribute("listeUsers", elements);
+		//request.setAttribute("listeUsers", Utilities.getAll());
 		this.getServletContext().getRequestDispatcher(PAGE).forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	//Affichage des requetes sur Actor
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		try {
-			
-			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-			Connection connection = DriverManager.getConnection(BDD,LOGIN,MDP);
-			Statement state = connection.createStatement();
-			 
-			ResultSet rs = state.executeQuery("select first_name, last_name, last_update, actor_id from actor");
-			System.out.println("ID: "+request.getParameter("id"));
-			boolean cont =true;
-			while(rs.next() & cont) {
-				System.out.println("IDactor: "+rs.getString("actor_id"));
-				if (rs.getString("actor_id").equals(request.getParameter("id"))) {
-					System.out.println("IDactor: "+rs.getString("actor_id"));
-					String prenom = rs.getString("first_name");
-					String nom = rs.getString("last_name");
-					int id = rs.getInt("actor_id");
-					Date date = rs.getDate("last_update");
-					ActorBean idUser = new ActorBean(prenom,nom,id,date);
-					cont =false;
-					request.getSession().setAttribute("idUser", idUser);
-					request.getSession().setAttribute("valid", true);
-					System.out.println(idUser);
-				}
-			}
-			
-			if(cont) {
-				request.getSession().setAttribute("valid", false);
-			}
-			state.close();	
-			connection.close();
-		} catch (SQLException e) {
-			System.out.println(e);
+		String type = request.getParameter("type");
+
+		switch(type) {
+		case "all":
+			request.setAttribute("idListe", Utilities.getAll());
+			break;
+		case "nom":
+			request.setAttribute("nomListe", Utilities.getNom(request.getParameter("nom")));
+			break;
+		case "id":
+			request.setAttribute("nomListe", Utilities.getId(Integer.parseInt(request.getParameter("id"))));		
 		}
-		
-		
-		//Redirection
-		this.getServletContext().getRequestDispatcher(PAGEID).forward(request, response);
+		this.getServletContext().getRequestDispatcher(PAGE).forward(request, response);
 	}
 
 }
