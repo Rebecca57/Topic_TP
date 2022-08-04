@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.m2i.methods.DaoFactory;
 import fr.m2i.models.TacheDAO;
 import fr.m2i.models.User;
 
@@ -42,7 +41,7 @@ public class UserServlet extends HttpServlet {
 		String nom = request.getParameter("nom");
 		User user = new User(prenom, nom);
 		try {
-			this.transaction(user);
+			System.out.println("transaction");//this.transaction(user);
 		}
 		catch(Exception e){
 			System.out.println(e);
@@ -50,6 +49,7 @@ public class UserServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
+	/**
 	private void transaction(User user) throws SQLException {
 
 		Connection connexion = null;
@@ -89,5 +89,6 @@ public class UserServlet extends HttpServlet {
         	}
         }
 	}
+	**/
 
 }
