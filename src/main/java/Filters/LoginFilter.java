@@ -39,7 +39,6 @@ public class LoginFilter extends HttpFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
-		System.out.println("FILTER \n FILTER \n FILTER");
 		HttpServletRequest httpRequest = (HttpServletRequest) request;        
 	    if(httpRequest.getMethod().equalsIgnoreCase("POST")){
 			String username = httpRequest.getParameter("username");

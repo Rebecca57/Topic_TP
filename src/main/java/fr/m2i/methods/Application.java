@@ -28,19 +28,38 @@ public class Application {
 				.setParameter(1,username)
 				.getSingleResult();
 		
+		
 		if (user!= null) {
-			if (user.getPsw().equals(psw)) return null;
-			System.out.println(user.getNom());
+			System.out.println("PSW DB= " +user.getPsw()+"  USER enterd: "+psw);
+			if (user.getPsw().equals(psw)) {
+				em.close();
+				return user;	
+			}
+			
 		}
 		System.out.println("USER: "+user);
 		em.close();
 		
-		return user;
+		return null;
 	}
 	
 	//CRUD NEWS
 	//DISPLAY
 	public static ArrayList<News> display() {
+		
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("UnityPersist");
+		EntityManager em = factory.createEntityManager();
+
+		@SuppressWarnings("unchecked")
+		ArrayList<News> listeTaches = (ArrayList<News>) em.createNativeQuery("SELECT * from news", News.class)
+				.getResultList();
+
+		em.close();
+		System.out.println(listeTaches);
+		return listeTaches;
+	}
+	
+	public static ArrayList<News> displayFive() {
 		
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("UnityPersist");
 		EntityManager em = factory.createEntityManager();
@@ -125,6 +144,54 @@ public class Application {
 			
 		em.close();
 	}
+	
+	//INSCRIPTION
+	//Check username
+	public static boolean checkUsername(String username){
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("UnityPersist");
+		EntityManager em = factory.createEntityManager();
+		
+		ArrayList<UserLogin> user = (ArrayList<UserLogin>) em.createNativeQuery("SELECT * from user WHERE username=?", UserLogin.class)
+				.setParameter(1,username)
+				.getResultList();
+		
+		System.out.println("USER: "+user);
+		em.close();
+		if (user!= null) {
+			return false;	
+		}else {
+			return true;
+		}
+		
+	}
+	//ADD
+	public static boolean register(UserLogin user){
+		
+		if (Application.checkUsername(user.getUsername())) {
+			EntityManagerFactory factory = Persistence.createEntityManagerFactory("UnityPersist");
+			EntityManager em = factory.createEntityManager();
+
+			boolean transac = false;
+			try {
+				em.getTransaction().begin();
+				em.persist(user);
+				transac = true;
+			}
+			finally {
+				if (transac) {
+					em.getTransaction().commit();
+				}
+				else {
+					em.getTransaction().rollback();
+				}	
+			}			
+			em.close();
+			return true;
+		}else {
+			return false;
+		}
+	}
+		
 	
 	
 

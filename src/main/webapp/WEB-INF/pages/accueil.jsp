@@ -8,7 +8,7 @@
 <title>Accueil</title>
 </head>
 <body>
-
+<jsp:include page="./inc/nav.jsp"/>
 <h1>Hello ${sessionScope.logged.prenom}</h1>
 <!-- SI NON ADMIN -->
 <c:if test="${!sessionScope.logged.admin}">

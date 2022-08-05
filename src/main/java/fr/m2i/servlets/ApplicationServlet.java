@@ -30,6 +30,11 @@ public class ApplicationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String deco = request.getParameter("deco");
+
+		if (deco != null) {
+			request.getSession().removeAttribute("logged");
+		}
 		this.getServletContext().getRequestDispatcher(PAGE).forward(request, response);
 	}
 

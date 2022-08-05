@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.m2i.methods.Application;
 import fr.m2i.models.News;
-import fr.m2i.models.Tache;
 
 /**
  * Servlet implementation class NewsServlet
