@@ -66,7 +66,7 @@
 	<fieldset>
 	<br>
 	<!-- Ajouter comments si loged -->
-	<c:if test="${sessionScope.logged} != null">
+	<c:if test="${sessionScope.log}">
 		<div class="comment">
 			<fieldset>
 			Comment:<br>
