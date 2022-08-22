@@ -44,6 +44,7 @@ public class LoginFilter extends HttpFilter implements Filter {
 			String username = httpRequest.getParameter("username");
 			String psw = httpRequest.getParameter("psw");
 			httpRequest.getSession().setAttribute("logged",Application.login(username, psw));
+			httpRequest.getSession().setAttribute("log",true);
 			
 	    }
 		// pass the request along the filter chain

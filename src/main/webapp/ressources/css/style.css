@@ -6,7 +6,7 @@ body{
 
 h1{
 	font-size: 1.5em;
-	color:#673434;
+	color:#0080c0;
 }
 
 #general{
@@ -36,10 +36,17 @@ input[type=text]{
 label{
 	font-weight: bold;
 	color:rgb(128, 64, 0);
+	font-size: 1.3em;
 }
 
 .labelTitle{
 	color: #008040;	
+}
+
+h4{
+	margin: 5px;
+	font-size: 1.3em;
+	font-style: underline;
 }
 
 
@@ -92,4 +99,15 @@ footer{
 }
 form{
 	display:inline-block;
+}
+
+.comment{
+	background-color: #c0c0c0;
+	border:1px solid silver;
+	box-shadow:2px 2px 2px silver;
+}
+
+.delete{
+	position:absolute;
+	right:0px;
 }

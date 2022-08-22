@@ -6,6 +6,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Login</title>
+<link rel="stylesheet" href="/Base/ressources/css/style.css">
 </head>
 <body>
 <fieldset>

@@ -7,20 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.m2i.methods.Application;
-
 /**
- * Servlet implementation class ApplicationServlet
+ * Servlet implementation class angular
  */
-@WebServlet("/Application")
-public class ApplicationServlet extends HttpServlet {
+@WebServlet("/angular")
+public class angular extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String PAGE="/WEB-INF/pages/login.jsp";
-	private static final String PAGE_ACCUEIL="/WEB-INF/pages/accueil.jsp"; 
+	private static final String PAGE="/angular/indexAngular.jsp";
+	
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ApplicationServlet() {
+    public angular() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,12 +29,6 @@ public class ApplicationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String deco = request.getParameter("deco");
-
-		if (deco != null) {
-			request.getSession().removeAttribute("logged");
-			request.getSession().removeAttribute("log");
-		}
 		this.getServletContext().getRequestDispatcher(PAGE).forward(request, response);
 	}
 
@@ -43,16 +36,8 @@ public class ApplicationServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("DO POST");
-		if (request.getSession().getAttribute("logged") == null) {
-			request.setAttribute("error", true);
-			this.getServletContext().getRequestDispatcher(PAGE).forward(request, response);
-		}
-		else {
-			request.setAttribute("listeNews", Application.display());
-			this.getServletContext().getRequestDispatcher(PAGE_ACCUEIL).forward(request, response);
-		}
-	
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

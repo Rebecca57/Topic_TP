@@ -7,4 +7,4 @@
 <%@taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
 
 
-<jsp:forward page="/welcome"></jsp:forward>
+Hello
