@@ -82,7 +82,7 @@ public class Application {
 		return listeTaches;
 	}
 	
-	//ADD
+	//ADD NEWS
 	public static void add(Integer userId, News news){
 		
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("UnityPersist");
@@ -107,7 +107,7 @@ public class Application {
 		em.close();
 	}
 	
-	//DELETE
+	//DELETE NEWS
 	public static void delete(Integer id){
 		
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("UnityPersist");
@@ -131,7 +131,7 @@ public class Application {
 		em.close();
 	}
 	
-	//MODIFY
+	//MODIFY NEWS
 	public static void modify(Integer userId, News news){
 		
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("UnityPersist");
@@ -159,7 +159,7 @@ public class Application {
 	}
 	
 	//INSCRIPTION
-	//Check username
+	//Check if username is available
 	public static boolean checkUsername(String username){
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("UnityPersist");
 		EntityManager em = factory.createEntityManager();
@@ -181,7 +181,7 @@ public class Application {
 		}
 		
 	}
-	//ADD
+	//ADD USER
 	public static boolean register(UserLogin user){
 		
 		if (Application.checkUsername(user.getUsername())) {
