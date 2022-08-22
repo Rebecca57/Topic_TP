@@ -36,9 +36,9 @@
 <c:if test="${!sessionScope.logged.admin}">
 	<!-- Liste des topics -->
 	<c:forEach items="${listeNews}" var="news">
-		
+		@ ${news.user.username}
 		<!-- Si créateur du topic possibilité de update/delete -->
-		<c:if test="${news.userId == sessionScope.logged.id}">
+		<c:if test="${news.user.id == sessionScope.logged.id}">
 		
 			<fieldset>
 				<!-- DELETE -->
@@ -47,7 +47,7 @@
 						<input type="submit" value="X">
 					</form>
 				</div><br>
-				<form action="/Base/NewsServlet?type=modify&id=${news.id}&userId=${news.userId}" method="POST">
+				<form action="/Base/NewsServlet?type=modify&id=${news.id}&userId=${news.user.id}" method="POST">
 					<input type="text" name="title" value="${news.title}"><br>
 					<textarea name="texte" rows="4" cols="50"> ${news.texte} </textarea><br>
 					<input type="submit" value="change">
@@ -55,7 +55,7 @@
 			</fieldset>
 
 		</c:if>
-		<c:if test="${news.userId != sessionScope.logged.id}">
+		<c:if test="${news.user.id != sessionScope.logged.id}">
 			<fieldset>
 				<h3>${news.title}</h3>
 				<div>${news.texte}</div>
@@ -104,8 +104,8 @@
 				<input type="submit" value="X">
 			</form>
 		</div>
-			<br>
-			<form action="/Base/NewsServlet?type=modify&id=${news.id}&userId=${news.userId}" method="POST">
+			@ ${news.user.username}
+			<form action="/Base/NewsServlet?type=modify&id=${news.id}&userId=${news.user.id}" method="POST">
 				<input type="text" name="title" value="${news.title}"><br>
 				<textarea name="texte" rows="4" cols="50"> ${news.texte} </textarea><br>
 				<input type="submit" value="change">

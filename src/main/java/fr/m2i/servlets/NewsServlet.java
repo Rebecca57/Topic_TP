@@ -50,9 +50,10 @@ public class NewsServlet extends HttpServlet {
 			case "modify":
 				String title = request.getParameter("title");
 				String texte = request.getParameter("texte");
+				Integer id = Integer.parseInt(request.getParameter("id"));
 				Integer userId = Integer.parseInt(request.getParameter("userId"));
-				News news = new News(title, texte,userId);
-				Application.modify(Integer.parseInt(request.getParameter("id")),news);
+				News news = new News(id,title, texte);
+				Application.modify(userId,news);
 						
 				break;
 				
@@ -60,8 +61,8 @@ public class NewsServlet extends HttpServlet {
 				String title1 = request.getParameter("title");
 				String texte1 = request.getParameter("texte");
 				Integer userId1 = Integer.parseInt(request.getParameter("userId"));
-				News news1 = new News(title1, texte1,userId1);
-				Application.add(news1);
+				News news1 = new News(title1, texte1);
+				Application.add(userId1,news1);
 				
 				break;	
 				

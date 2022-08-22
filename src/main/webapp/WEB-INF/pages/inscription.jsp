@@ -23,7 +23,7 @@
 		<label>Password:</label>
 		<input type="text" placeholder="Password" name="password"><br>
 
-      	<input type="checkbox" id="admin" name="admin" checked>
+      	<input type="checkbox" id="admin" name="admin">
       		<label for="admin">Admin</label><br>
       	<input type="submit" value="Register">
 	</form>
