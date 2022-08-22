@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -36,13 +38,18 @@ public class UserLogin {
 	@Basic
 	@Column(name="admin")
 	private boolean admin;
-	@OneToMany(targetEntity = Comment.class, mappedBy="user")
+	@OneToMany(targetEntity = Comment.class, mappedBy="user",cascade = CascadeType.ALL)
 	private List<Comment> comments = new ArrayList<>();
 	
+	@OneToMany(targetEntity = News.class, mappedBy="user", cascade = CascadeType.ALL)
+	private List<News> news = new ArrayList<>();
+	
+
+
 	//Constructeur
 	public UserLogin() {	
 	}
-	
+
 	public UserLogin(String prenom, String nom, String username, String psw, boolean a) {
 		this.setPrenom(prenom);
 		this.setNom(nom);
@@ -51,6 +58,7 @@ public class UserLogin {
 		this.setAdmin(a);
 	}
 	
+	//Getter Setter
 	public String getPrenom() {
 		return prenom;
 	}
@@ -88,6 +96,20 @@ public class UserLogin {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	public List<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+	
+	public List<News> getNews() {
+		return news;
+	}
+	public void setNews(List<News> news) {
+		this.news = news;
 	}
 	
 }

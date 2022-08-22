@@ -49,7 +49,9 @@ public class Inscription extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("ADMIN VALUE recupere: "+request.getParameter("admin"));
-		boolean admin = request.getParameter("admin").equals("on")?true:false;
+		boolean admin = false;
+		if (request.getParameter("admin") != null) {
+			 admin = request.getParameter("admin").equals("on")?true:false;
 		String prenom = request.getParameter("prenom");
 		String nom = request.getParameter("nom");
 		String username = request.getParameter("username");
@@ -62,6 +64,7 @@ public class Inscription extends HttpServlet {
 		}
 
 		request.getServletContext().getRequestDispatcher(PAGE_INSCRIPTION).forward(request, response);
+	}
 	}
 
 }

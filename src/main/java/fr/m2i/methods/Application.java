@@ -7,6 +7,7 @@ import javax.activation.DataSource;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
 import fr.m2i.models.Commande;
@@ -82,11 +83,13 @@ public class Application {
 	}
 	
 	//ADD
-	public static void add(News news){
+	public static void add(Integer userId, News news){
 		
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("UnityPersist");
 		EntityManager em = factory.createEntityManager();
 
+		UserLogin user = em.find(UserLogin.class,userId);
+		news.setUser(user);
 		boolean transac = false;
 		try {
 			em.getTransaction().begin();
@@ -129,18 +132,19 @@ public class Application {
 	}
 	
 	//MODIFY
-	public static void modify(Integer id, News news){
+	public static void modify(Integer userId, News news){
 		
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("UnityPersist");
 		EntityManager em = factory.createEntityManager();
 
-		News newsU = em.find(News.class,id);
+		News newsU = em.find(News.class,news.getId());
+		UserLogin user = em.find(UserLogin.class,userId);
 		boolean transac = false;
 		try {
 			em.getTransaction().begin();
 				newsU.setTitle(news.getTitle());
 				newsU.setTexte(news.getTexte());
-				newsU.setUserId(news.getUserId());
+				newsU.setUser(user);
 				transac=true;
 		}finally {
 			if (transac) {
@@ -159,17 +163,21 @@ public class Application {
 	public static boolean checkUsername(String username){
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("UnityPersist");
 		EntityManager em = factory.createEntityManager();
-		
-		ArrayList<UserLogin> user = (ArrayList<UserLogin>) em.createNativeQuery("SELECT * from user WHERE username=?", UserLogin.class)
-				.setParameter(1,username)
-				.getResultList();
-		
+		UserLogin user = null;
+		try{
+			user = (UserLogin) em.createNativeQuery("SELECT * from user WHERE username=?", UserLogin.class)
+					.setParameter(1,username)
+					.getSingleResult();
+		}catch (NoResultException nre){
+			user = null;
+		}
+
 		System.out.println("USER: "+user);
 		em.close();
-		if (user!= null) {
-			return false;	
+		if (user == null) {
+			return true;	
 		}else {
-			return true;
+			return false;
 		}
 		
 	}
@@ -294,6 +302,29 @@ public class Application {
 		}		
 			
 		em.close();
+	}
+	
+	//GET users of news
+	//CRUD NEWS
+	//DISPLAY
+	public static ArrayList<News> getNewsUser() {
+		
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("UnityPersist");
+		EntityManager em = factory.createEntityManager();
+
+		@SuppressWarnings("unchecked")
+		ArrayList<News> listeNews = (ArrayList<News>) em.createNativeQuery("SELECT * from news", News.class)
+				.getResultList();
+		
+		//COMMANDS FOREACH USER
+		for(int i = 0 ; i < listeNews.size(); i++) {		
+			Integer id = listeNews.get(i).getId();
+			ArrayList<Comment> listeComments = (ArrayList<Comment>) em.createQuery("select c from Comment c where c.news.id ="+id, Comment.class).getResultList();
+			listeNews.get(i).setComments(listeComments);			
+		}
+
+		em.close();
+		return listeNews;
 	}
 	
 		

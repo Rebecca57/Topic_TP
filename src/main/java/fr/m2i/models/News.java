@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -31,33 +33,44 @@ public class News{
 	@Column(name="texte")
 	private String texte;
 	
-	@OneToMany(targetEntity = Comment.class, mappedBy="news")
+	@OneToMany(targetEntity = Comment.class, mappedBy="news",cascade = CascadeType.ALL)
 	private List<Comment> comments = new ArrayList<>();
 	
-	@Basic
-	@Column(name="user_id")
-	private Integer userId;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private UserLogin user;
 	
-
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-
 	//Constructeur
 	public News() {	
 	}
 	
-	public News(String title, String texte, Integer userId) {
+	public News(String title, String texte, UserLogin user) {
 		this.setTitle(title);
 		this.setTexte(texte);
-		this.setUserId(userId);
+		this.setUser(user);
 	}
 	
 	
+	public News(String title, String texte) {
+		this.setTitle(title);
+		this.setTexte(texte);
+	}
+	
+	public News(Integer id, String title, String texte) {
+		this.id = id;
+		this.setTitle(title);
+		this.setTexte(texte);
+	}
+	
+	
+	public UserLogin getUser() {
+		return user;
+	}
+
+	public void setUser(UserLogin user) {
+		this.user = user;
+	}
+
 	public List<Comment> getComments() {
 		return comments;
 	}
